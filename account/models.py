@@ -1,10 +1,14 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth.models import User
+
+
+# make user email field unique
+User._meta.get_field('email')._unique = True
 
 
 class Profile(models.Model):
-	user = models.OneToOneField(settings.AUTH_USER_MODEL)
-	team = models.CharField(default='', max_length=75)
+	user = models.OneToOneField(User)
+	team = models.CharField(max_length=75)
 
 
 	def __str__(self):
