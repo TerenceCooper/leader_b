@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load process_email %}
+
+{% block title %}Leader Board{% endblock %}
+
+{% block content %}
+
+<style>
+  table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  }
+  
+  td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+  background-color: #dddddd;
+  }
+</style>
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>RMSE</th>
+    <th>Uploaded Time</th>
+    <th>User</th>
+    <th>Team</th>
+  </tr>
+  {% for record in records %}
+  <tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ record.rmse }}</td>
+    <td>{{ record.created }}</td>
+    <td>{{ record.user.email|convert_email }}</td>
+    <td>{{ record.user.profile }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
