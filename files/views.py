@@ -15,7 +15,7 @@ def list(request):
 			newdoc = Document(docfile = request.FILES['docfile'], user=request.user)
 			newdoc.save()
 
-			return HttpResponseRedirect(reverse('files.list'))
+			return HttpResponseRedirect(reverse('leader_board'))
 	else:
 		form = DocumentForm()
 	documents = Document.objects.filter(user__id=request.user.id) # filter()
